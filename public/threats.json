@@ -1,0 +1,411 @@
+{
+  "threats": [
+    {
+      "folder": "恶意插件安装",
+      "title": "恶意插件安装",
+      "layer": "第7层 — 智能体生态系统",
+      "severity": "严重",
+      "id": "AE-001",
+      "sourcePath": "extensions/\\*",
+      "layerDescription": "生态系统层面的威胁：恶意插件、供应链攻击、技能仓库（Skill Registry）投毒、智能体冒充"
+    },
+    {
+      "folder": "插件供应链攻击",
+      "title": "插件供应链攻击",
+      "layer": "第7层 — 智能体生态系统",
+      "severity": "高危",
+      "id": "AE-002",
+      "sourcePath": "extensions/ \\*/package.json",
+      "layerDescription": "生态系统层面的威胁：恶意插件、供应链攻击、技能仓库（Skill Registry）投毒、智能体冒充"
+    },
+    {
+      "folder": "技能仓库（Skill Registry）投毒",
+      "title": "技能仓库（Skill Registry）投毒",
+      "layer": "第7层 — 智能体生态系统",
+      "severity": "中危",
+      "id": "AE-003",
+      "sourcePath": "src/cli/skills-cli.ts",
+      "layerDescription": "生态系统层面的威胁：恶意插件、供应链攻击、技能仓库（Skill Registry）投毒、智能体冒充"
+    },
+    {
+      "folder": "多智能体串谋",
+      "title": "多智能体串谋",
+      "layer": "第7层 — 智能体生态系统",
+      "severity": "低危",
+      "id": "AE-004",
+      "sourcePath": "src/agents/openclaw-tools.ts",
+      "layerDescription": "生态系统层面的威胁：恶意插件、供应链攻击、技能仓库（Skill Registry）投毒、智能体冒充"
+    },
+    {
+      "folder": "智能体冒充",
+      "title": "智能体冒充",
+      "layer": "第7层 — 智能体生态系统",
+      "severity": "中危",
+      "id": "AE-005",
+      "sourcePath": "src/agents/identity.ts",
+      "layerDescription": "生态系统层面的威胁：恶意插件、供应链攻击、技能仓库（Skill Registry）投毒、智能体冒充"
+    },
+    {
+      "folder": "通过提示词注入滥用工具",
+      "title": "通过提示词注入滥用工具",
+      "layer": "第3层 — 智能体框架",
+      "severity": "严重",
+      "id": "AF-001",
+      "sourcePath": "src/agents/bash-tools.ts",
+      "layerDescription": "框架层面的威胁：工具滥用、会话派生、跨会话信息泄漏、沙箱逃逸"
+    },
+    {
+      "folder": "会话派生滥用",
+      "title": "会话派生滥用",
+      "layer": "第3层 — 智能体框架",
+      "severity": "高危",
+      "id": "AF-002",
+      "sourcePath": "src/agents/openclaw-tools.ts",
+      "layerDescription": "框架层面的威胁：工具滥用、会话派生、跨会话信息泄漏、沙箱逃逸"
+    },
+    {
+      "folder": "跨会话数据泄漏",
+      "title": "跨会话数据泄漏",
+      "layer": "第3层 — 智能体框架",
+      "severity": "高危",
+      "id": "AF-003",
+      "sourcePath": "src/config/config.ts",
+      "layerDescription": "框架层面的威胁：工具滥用、会话派生、跨会话信息泄漏、沙箱逃逸"
+    },
+    {
+      "folder": "提权模式利用",
+      "title": "提权模式利用",
+      "layer": "第3层 — 智能体框架",
+      "severity": "严重",
+      "id": "AF-004",
+      "sourcePath": "src/cli/exec-approvals-cli.ts",
+      "layerDescription": "框架层面的威胁：工具滥用、会话派生、跨会话信息泄漏、沙箱逃逸"
+    },
+    {
+      "folder": "沙箱逃逸",
+      "title": "沙箱逃逸",
+      "layer": "第3层 — 智能体框架",
+      "severity": "高危",
+      "id": "AF-005",
+      "sourcePath": "src/config/config.sandbox-docker.test.ts",
+      "layerDescription": "框架层面的威胁：工具滥用、会话派生、跨会话信息泄漏、沙箱逃逸"
+    },
+    {
+      "folder": "智能体间通信滥用",
+      "title": "智能体间通信滥用",
+      "layer": "第3层 — 智能体框架",
+      "severity": "中危",
+      "id": "AF-006",
+      "sourcePath": "src/agents/openclaw-tools.ts",
+      "layerDescription": "框架层面的威胁：工具滥用、会话派生、跨会话信息泄漏、沙箱逃逸"
+    },
+    {
+      "folder": "网关绑定暴露",
+      "title": "网关绑定暴露",
+      "layer": "第4层 — 部署与基础设施",
+      "severity": "严重",
+      "id": "DI-001",
+      "sourcePath": "src/security/audit.ts",
+      "layerDescription": "基础设施层面的威胁：网关暴露、代理欺骗、运行时漏洞、Docker Socket 暴露"
+    },
+    {
+      "folder": "Tailscale Funnel 配置错误",
+      "title": "Tailscale Funnel 配置错误",
+      "layer": "第4层 — 部署与基础设施",
+      "severity": "严重",
+      "id": "DI-002",
+      "sourcePath": "src/gateway/gateway-cli.ts",
+      "layerDescription": "基础设施层面的威胁：网关暴露、代理欺骗、运行时漏洞、Docker Socket 暴露"
+    },
+    {
+      "folder": "反向代理头部（Header）欺骗",
+      "title": "反向代理头部（Header）欺骗",
+      "layer": "第4层 — 部署与基础设施",
+      "severity": "高危",
+      "id": "DI-003",
+      "sourcePath": "src/security/audit.ts",
+      "layerDescription": "基础设施层面的威胁：网关暴露、代理欺骗、运行时漏洞、Docker Socket 暴露"
+    },
+    {
+      "folder": "WebSocket 令牌（Token）暴力破解",
+      "title": "WebSocket 令牌（Token）暴力破解",
+      "layer": "第4层 — 部署与基础设施",
+      "severity": "中危",
+      "id": "DI-004",
+      "sourcePath": "src/gateway/auth.ts",
+      "layerDescription": "基础设施层面的威胁：网关暴露、代理欺骗、运行时漏洞、Docker Socket 暴露"
+    },
+    {
+      "folder": "Node.js 运行时漏洞",
+      "title": "Node.js 运行时漏洞",
+      "layer": "第4层 — 部署与基础设施",
+      "severity": "中危",
+      "id": "DI-005",
+      "sourcePath": "package.json",
+      "layerDescription": "基础设施层面的威胁：网关暴露、代理欺骗、运行时漏洞、Docker Socket 暴露"
+    },
+    {
+      "folder": "Docker Socket 暴露",
+      "title": "Docker Socket 暴露",
+      "layer": "第4层 — 部署与基础设施",
+      "severity": "高危",
+      "id": "DI-006",
+      "sourcePath": "src/config/config.sandbox-docker.test.ts",
+      "layerDescription": "基础设施层面的威胁：网关暴露、代理欺骗、运行时漏洞、Docker Socket 暴露"
+    },
+    {
+      "folder": "凭证明文存储",
+      "title": "凭证明文存储",
+      "layer": "第2层 — 数据操作",
+      "severity": "严重",
+      "id": "DO-001",
+      "sourcePath": "src/pairing/pairing-store.ts",
+      "layerDescription": "数据处理层面的威胁：凭证存储、状态目录权限、会话历史、向量数据库投毒"
+    },
+    {
+      "folder": "状态目录全局可读",
+      "title": "状态目录全局可读",
+      "layer": "第2层 — 数据操作",
+      "severity": "严重",
+      "id": "DO-002",
+      "sourcePath": "src/security/audit.ts",
+      "layerDescription": "数据处理层面的威胁：凭证存储、状态目录权限、会话历史、向量数据库投毒"
+    },
+    {
+      "folder": "消息历史泄漏",
+      "title": "消息历史泄漏",
+      "layer": "第2层 — 数据操作",
+      "severity": "高危",
+      "id": "DO-003",
+      "sourcePath": "src/config/sessions.ts",
+      "layerDescription": "数据处理层面的威胁：凭证存储、状态目录权限、会话历史、向量数据库投毒"
+    },
+    {
+      "folder": "技能（Skill）代码注入",
+      "title": "技能（Skill）代码注入",
+      "layer": "第2层 — 数据操作",
+      "severity": "严重",
+      "id": "DO-004",
+      "sourcePath": "src/security/skill-scanner.ts",
+      "layerDescription": "数据处理层面的威胁：凭证存储、状态目录权限、会话历史、向量数据库投毒"
+    },
+    {
+      "folder": "向量数据库投毒",
+      "title": "向量数据库投毒",
+      "layer": "第2层 — 数据操作",
+      "severity": "高危",
+      "id": "DO-005",
+      "sourcePath": "extensions/memory-lancedb/",
+      "layerDescription": "数据处理层面的威胁：凭证存储、状态目录权限、会话历史、向量数据库投毒"
+    },
+    {
+      "folder": "浏览器配置数据泄漏",
+      "title": "浏览器配置数据泄漏",
+      "layer": "第2层 — 数据操作",
+      "severity": "中危",
+      "id": "DO-006",
+      "sourcePath": "src/browser/",
+      "layerDescription": "数据处理层面的威胁：凭证存储、状态目录权限、会话历史、向量数据库投毒"
+    },
+    {
+      "folder": "日志记录不足",
+      "title": "日志记录不足",
+      "layer": "第5层 — 评估与可观测性",
+      "severity": "高危",
+      "id": "EO-001",
+      "sourcePath": "src/security/audit.ts",
+      "layerDescription": "监控缺口：日志记录不足、异常检测缺失、审计日志完整性、探测失败"
+    },
+    {
+      "folder": "缺少运行时行为异常检测",
+      "title": "缺少运行时行为异常检测",
+      "layer": "第5层 — 评估与可观测性",
+      "severity": "中危",
+      "id": "EO-002",
+      "sourcePath": "N/A — Gap Identified",
+      "layerDescription": "监控缺口：日志记录不足、异常检测缺失、审计日志完整性、探测失败"
+    },
+    {
+      "folder": "缺少安全评估",
+      "title": "缺少安全评估",
+      "layer": "第5层 — 评估与可观测性",
+      "severity": "中危",
+      "id": "EO-003",
+      "sourcePath": "N/A — Gap Identified",
+      "layerDescription": "监控缺口：日志记录不足、异常检测缺失、审计日志完整性、探测失败"
+    },
+    {
+      "folder": "审计日志篡改",
+      "title": "审计日志篡改",
+      "layer": "第5层 — 评估与可观测性",
+      "severity": "中危",
+      "id": "EO-004",
+      "sourcePath": "src/logging.ts",
+      "layerDescription": "监控缺口：日志记录不足、异常检测缺失、审计日志完整性、探测失败"
+    },
+    {
+      "folder": "网关探测失败盲区",
+      "title": "网关探测失败盲区",
+      "layer": "第5层 — 评估与可观测性",
+      "severity": "低危",
+      "id": "EO-005",
+      "sourcePath": "src/security/audit.ts",
+      "layerDescription": "监控缺口：日志记录不足、异常检测缺失、审计日志完整性、探测失败"
+    },
+    {
+      "folder": "通过消息频道进行对抗性提示词注入",
+      "title": "通过消息频道进行对抗性提示词注入",
+      "layer": "第1层 — 基础模型",
+      "severity": "严重",
+      "id": "LM-001",
+      "sourcePath": "src/channels/",
+      "layerDescription": "LLM 层面的威胁：提示词注入、越狱攻击、凭证泄露、系统提示词泄漏"
+    },
+    {
+      "folder": "通过多轮对话上下文进行越狱攻击",
+      "title": "通过多轮对话上下文进行越狱攻击",
+      "layer": "第1层 — 基础模型",
+      "severity": "高危",
+      "id": "LM-002",
+      "sourcePath": "src/sessions/",
+      "layerDescription": "LLM 层面的威胁：提示词注入、越狱攻击、凭证泄露、系统提示词泄漏"
+    },
+    {
+      "folder": "模型提供商 API 密钥泄露",
+      "title": "模型提供商 API 密钥泄露",
+      "layer": "第1层 — 基础模型",
+      "severity": "严重",
+      "id": "LM-003",
+      "sourcePath": "src/config/,\\~/.openclaw/openclaw\\.json",
+      "layerDescription": "LLM 层面的威胁：提示词注入、越狱攻击、凭证泄露、系统提示词泄漏"
+    },
+    {
+      "folder": "通过文件上传进行提示词注入",
+      "title": "通过文件上传进行提示词注入",
+      "layer": "第1层 — 基础模型",
+      "severity": "高危",
+      "id": "LM-004",
+      "sourcePath": "src/media/,src/media-understanding/",
+      "layerDescription": "LLM 层面的威胁：提示词注入、越狱攻击、凭证泄露、系统提示词泄漏"
+    },
+    {
+      "folder": "系统提示词泄漏",
+      "title": "系统提示词泄漏",
+      "layer": "第1层 — 基础模型",
+      "severity": "中危",
+      "id": "LM-005",
+      "sourcePath": "src/agents/bootstrap-files.ts",
+      "layerDescription": "LLM 层面的威胁：提示词注入、越狱攻击、凭证泄露、系统提示词泄漏"
+    },
+    {
+      "folder": "私信（DM）策略配置错误",
+      "title": "私信（DM）策略配置错误",
+      "layer": "第6层 — 安全与合规",
+      "severity": "严重",
+      "id": "SC-001",
+      "sourcePath": "All Channel Monitors",
+      "layerDescription": "策略层面的威胁：开放的私信策略、群聊访问控制、配对码暴力破解、身份欺骗"
+    },
+    {
+      "folder": "群聊未授权访问",
+      "title": "群聊未授权访问",
+      "layer": "第6层 — 安全与合规",
+      "severity": "高危",
+      "id": "SC-002",
+      "sourcePath": "src/config/group-policy.ts",
+      "layerDescription": "策略层面的威胁：开放的私信策略、群聊访问控制、配对码暴力破解、身份欺骗"
+    },
+    {
+      "folder": "配对码暴力破解",
+      "title": "配对码暴力破解",
+      "layer": "第6层 — 安全与合规",
+      "severity": "中危",
+      "id": "SC-003",
+      "sourcePath": "src/pairing/pairing-store.ts",
+      "layerDescription": "策略层面的威胁：开放的私信策略、群聊访问控制、配对码暴力破解、身份欺骗"
+    },
+    {
+      "folder": "身份欺骗",
+      "title": "身份欺骗",
+      "layer": "第6层 — 安全与合规",
+      "severity": "中危",
+      "id": "SC-004",
+      "sourcePath": "src/channels/sender-identity.ts",
+      "layerDescription": "策略层面的威胁：开放的私信策略、群聊访问控制、配对码暴力破解、身份欺骗"
+    },
+    {
+      "folder": "跨渠道关联",
+      "title": "跨渠道关联",
+      "layer": "第6层 — 安全与合规",
+      "severity": "低危",
+      "id": "SC-005",
+      "sourcePath": "src/channels/",
+      "layerDescription": "策略层面的威胁：开放的私信策略、群聊访问控制、配对码暴力破解、身份欺骗"
+    },
+    {
+      "folder": "非人类身份管理",
+      "title": "非人类身份管理",
+      "layer": "第6层 — 安全与合规",
+      "severity": "中危",
+      "id": "SC-006",
+      "sourcePath": "src/agents/identity.ts",
+      "layerDescription": "策略层面的威胁：开放的私信策略、群聊访问控制、配对码暴力破解、身份欺骗"
+    }
+  ],
+  "cliCommands": [
+    {
+      "folder": "列出所有通道中待处理的配对请求",
+      "title": "列出所有通道中待处理的配对请求",
+      "layer": "",
+      "severity": "",
+      "id": "",
+      "sourcePath": "",
+      "layerDescription": ""
+    },
+    {
+      "folder": "对所有层进行全面的安全审计",
+      "title": "对所有层进行全面的安全审计",
+      "layer": "",
+      "severity": "",
+      "id": "",
+      "sourcePath": "",
+      "layerDescription": ""
+    },
+    {
+      "folder": "批准待处理的发送方配对请求",
+      "title": "批准待处理的发送方配对请求",
+      "layer": "",
+      "severity": "",
+      "id": "",
+      "sourcePath": "",
+      "layerDescription": ""
+    },
+    {
+      "folder": "探测并验证通道连通性和安全性",
+      "title": "探测并验证通道连通性和安全性",
+      "layer": "",
+      "severity": "",
+      "id": "",
+      "sourcePath": "",
+      "layerDescription": ""
+    },
+    {
+      "folder": "检查配置问题和常见错误配置",
+      "title": "检查配置问题和常见错误配置",
+      "layer": "",
+      "severity": "",
+      "id": "",
+      "sourcePath": "",
+      "layerDescription": ""
+    },
+    {
+      "folder": "深度网关健康检查及安全验证",
+      "title": "深度网关健康检查及安全验证",
+      "layer": "",
+      "severity": "",
+      "id": "",
+      "sourcePath": "",
+      "layerDescription": ""
+    }
+  ]
+}

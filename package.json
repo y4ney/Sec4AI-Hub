@@ -1,0 +1,44 @@
+{
+  "name": "aiforsecurity-hub",
+  "private": true,
+  "version": "1.0.0",
+  "description": "AI 安全威胁知识库 — 涵盖 OpenClaw MAESTRO 威胁模型与 AI Agent 威胁模型，提供交互式安全威胁建模与防护剧本",
+  "type": "module",
+  "keywords": [
+    "maestro",
+    "threat-model",
+    "agentic-ai",
+    "ai-security",
+    "ai-agent",
+    "llm-security",
+    "openclaw",
+    "cybersecurity",
+    "threat-intelligence",
+    "playbook"
+  ],
+  "homepage": "https://y4ney.github.io/maestro-threat-model/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/y4ney/maestro-threat-model.git"
+  },
+  "author": "y4ney",
+  "license": "Apache-2.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build && cp dist/index.html dist/404.html",
+    "preview": "vite preview",
+    "gen": "node gen-index.mjs",
+    "prebuild": "node gen-index.mjs && rm -rf public/wiki && mkdir -p public/wiki && cp -r wiki/openclaw-threat-model public/wiki/openclaw-threat-model && cp -r wiki/ai-agent-threat-model public/wiki/ai-agent-threat-model",
+    "lint": "tsc --noEmit",
+    "start": "bash start.sh",
+    "video": "node scripts/demo-video.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.59.1",
+    "typescript": "~5.9.3",
+    "vite": "^8.0.1"
+  },
+  "dependencies": {
+    "marked": "^17.0.5"
+  }
+}

@@ -1,0 +1,48 @@
+# ═══════════════════════════════════════════════════════════════
+# MAESTRO Threat Model — Docker Compose
+# Usage: docker compose up -d
+# ═══════════════════════════════════════════════════════════════
+
+services:
+  maestro:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: maestro-threat-model:latest
+    container_name: maestro-threat-model
+    restart: unless-stopped
+
+    # CIS: Read-only root filesystem
+    read_only: true
+    tmpfs:
+      - /var/cache/nginx
+      - /var/log/nginx
+      - /run
+
+    # CIS: Drop all capabilities
+    cap_drop:
+      - ALL
+
+    # CIS: Resource limits
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 64M
+        reservations:
+          cpus: "0.10"
+          memory: 16M
+
+    # CIS: No privilege escalation
+    security_opt:
+      - no-new-privileges:true
+
+    ports:
+      - "8080:8080"
+
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8080/"]
+      interval: 30s
+      timeout: 3s
+      start_period: 5s
+      retries: 3
