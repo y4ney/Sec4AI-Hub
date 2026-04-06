@@ -33,5 +33,11 @@ dist-ssr
 .DS_Store
 Thumbs.db
 
+# Generated index files
+public/wiki-index*.json
+
+# Copied wiki content
+public/wiki/
+
 # Claude Code
 .claude/

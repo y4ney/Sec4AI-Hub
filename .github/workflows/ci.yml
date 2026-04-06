@@ -21,14 +21,17 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Dependency audit
+        run: npm audit --omit=dev || true
+
+      - name: Type check
+        run: npx tsc --noEmit
+
       - name: Generate index
         run: node gen-index.mjs
 
       - name: Sync wiki
         run: rm -rf public/wiki && cp -r wiki public/wiki
-
-      - name: Type check
-        run: npx tsc --noEmit
 
       - name: Build
         run: npm run build
@@ -51,20 +54,11 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
         with:
-          node-version: 20
-          cache: npm
-
-      - name: Install and build
-        run: |
-          npm ci
-          node gen-index.mjs
-          rm -rf public/wiki && cp -r wiki public/wiki
-          npm run build
+          name: dist
+          path: dist
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

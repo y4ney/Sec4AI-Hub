@@ -13,7 +13,7 @@ function parseFrontmatter(content) {
   let currentKey = null;
 
   for (const line of lines) {
-    if (/^\s+- "/.test(line) && currentKey) {
+    if (/^\s+- /.test(line) && currentKey) {
       const val = line.trim().replace(/^- "?/, '').replace(/"?\s*$/, '');
       if (Array.isArray(meta[currentKey])) meta[currentKey].push(val);
       continue;
@@ -131,6 +131,7 @@ function generateAIAgentIndex() {
       evaluationStep: meta['威胁评估步骤'] || '',
       category: meta['威胁类别'] || '',
       playbookNames: splitCommaField(meta['防护剧本名称'] || ''),
+      owaspRelation: normalizeArray(meta['与 OWASP Top 10 for LLM的关联'] || meta['OWASP Top 10 for LLM的关联'] || ''),
     });
   }
 

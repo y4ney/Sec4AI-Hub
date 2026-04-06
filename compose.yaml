@@ -1,15 +1,15 @@
 # ═══════════════════════════════════════════════════════════════
-# MAESTRO Threat Model — Docker Compose
+# Sec4AI Hub — Docker Compose
 # Usage: docker compose up -d
 # ═══════════════════════════════════════════════════════════════
 
 services:
-  maestro:
+  sec4ai:
     build:
       context: .
       dockerfile: Dockerfile
-    image: maestro-threat-model:latest
-    container_name: maestro-threat-model
+    image: sec4ai-hub:latest
+    container_name: sec4ai-hub
     restart: unless-stopped
 
     # CIS: Read-only root filesystem

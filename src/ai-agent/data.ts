@@ -9,6 +9,7 @@ export interface AgentThreatIndexEntry {
   evaluationStep: string;
   category: string;
   playbookNames: string[];
+  owaspRelation: string[];
 }
 
 export interface PlaybookIndexEntry {
@@ -35,8 +36,9 @@ export interface AgentThreatDetail {
   category: string;
   categoryMeta: CategoryMeta;
   playbookNames: string[];
+  owaspRelation: string[];
+  owaspBody: string;
   description: string;
-  owaspRelation: string;
   attackScenarios: string;
   mitigation: string;
   rawContent: string;
@@ -168,8 +170,9 @@ export async function loadThreatDetail(threatId: string): Promise<AgentThreatDet
     category: entry.category,
     categoryMeta: getCategoryMeta(entry.category, index.categories),
     playbookNames: entry.playbookNames,
+    owaspRelation: entry.owaspRelation,
+    owaspBody: owaspRaw ? await renderMarkdown(owaspRaw) : '',
     description: descRaw ? await renderMarkdown(descRaw) : '',
-    owaspRelation: owaspRaw ? await renderMarkdown(owaspRaw) : '',
     attackScenarios: attackRaw ? await renderMarkdown(attackRaw) : '',
     mitigation: mitRaw ? await renderMarkdown(mitRaw) : '',
     rawContent: md,
@@ -213,6 +216,11 @@ export async function getSortedThreatIds(): Promise<string[]> {
   return index.threats.map(t => t.threatId).sort((a, b) => {
     return parseInt(a.replace('T', '')) - parseInt(b.replace('T', ''));
   });
+}
+
+export async function getTableOrderedThreatIds(): Promise<string[]> {
+  const groups = await buildStepGroups();
+  return groups.flatMap(g => g.threats.map(t => t.threatId));
 }
 
 export async function getAllThreats(): Promise<AgentThreatIndexEntry[]> {

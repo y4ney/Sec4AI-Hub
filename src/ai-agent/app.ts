@@ -1,4 +1,4 @@
-import { buildStepGroups, loadThreatDetail, loadPlaybookDetail, getSortedThreatIds, getSortedPlaybookIds, getPlaybookTitleMap, getAllPlaybooks, getThreatTitleMap, getThreatNameToIdMap, search } from './data';
+import { buildStepGroups, loadThreatDetail, loadPlaybookDetail, getTableOrderedThreatIds, getSortedPlaybookIds, getPlaybookTitleMap, getAllPlaybooks, getThreatTitleMap, getThreatNameToIdMap, search } from './data';
 import type { StepGroup, AgentThreatDetail, PlaybookDetail, SearchResult } from './data';
 import { renderNavbar } from '../shared/navbar';
 import { renderFooter } from '../shared/footer';
@@ -67,8 +67,8 @@ async function renderListPage(): Promise<string> {
               <tr>
                 <th class="col-id">威胁序号</th>
                 <th class="col-title">威胁名称</th>
-                <th class="col-severity">Threat Name</th>
                 <th class="col-srcpath">防护剧本</th>
+                <th class="col-owasp">OWASP Top 10 for LLM</th>
               </tr>
             </thead>
             <tbody>
@@ -119,10 +119,17 @@ function renderStepGroups(groups: StepGroup[]): string {
     ${group.threats.map(t => `
       <tr class="table-row" data-nav="ai-agent-threat" data-id="${t.threatId}">
         <td class="col-id"><code class="id-code" style="--layer-color: ${color}">${t.threatId}</code></td>
-        <td class="col-title"><span class="threat-link">${t.title}</span></td>
-        <td class="col-severity"><span class="sev-text" style="color:var(--text-secondary)">${t.threatName}</span></td>
+        <td class="col-title">
+          <span class="threat-link">${t.title}</span>
+          ${t.owaspRelation.length === 0 ? '<span class="new-badge new-badge-sm">NEW</span>' : ''}
+        </td>
         <td class="col-srcpath">
           ${t.playbookNames.map(p => `<span class="src-tag">${p}</span>`).join('')}
+        </td>
+        <td class="col-owasp">
+          ${t.owaspRelation.length > 0
+            ? t.owaspRelation.map(o => `<span class="src-tag owasp-tag">${o}</span>`).join('')
+            : '<span class="no-data">—</span>'}
         </td>
       </tr>
     `).join('')}
@@ -139,18 +146,19 @@ function renderThreatPage(threat: AgentThreatDetail, prevId: string | null, next
       <div class="breadcrumb">
         <span class="bc-link" data-nav="ai-agent-home">AI Agent 威胁模型</span>
         <span class="bc-sep">/</span>
-        <span class="bc-current">${threat.threatId}</span>
+        <span class="bc-current">${threat.title}</span>
       </div>
 
       <div class="detail-header" style="--layer-color: ${catColor}">
         <div class="detail-header-top">
           <code class="detail-id">${threat.threatId}</code>
           <span class="layer-tag" style="--tag-color: ${catColor}">${threat.category}</span>
+          ${threat.owaspRelation.length === 0 ? '<span class="new-badge">NEW</span>' : ''}
         </div>
         <h1 class="detail-title">${threat.title}</h1>
         <div class="detail-fields">
           <div class="detail-field">
-            <span class="field-key">英文名</span>
+            <span class="field-key">Threat Name</span>
             <span class="field-value">${threat.threatName}</span>
           </div>
           <div class="detail-field">
@@ -166,6 +174,13 @@ function renderThreatPage(threat: AgentThreatDetail, prevId: string | null, next
               }).join(' ')}
             </div>
           </div>
+          ${threat.owaspRelation.length > 0 ? `
+          <div class="detail-field">
+            <span class="field-key">OWASP Top 10 for LLM</span>
+            <div class="field-value">
+              ${threat.owaspRelation.map(o => `<span class="src-tag owasp-tag">${o}</span>`).join(' ')}
+            </div>
+          </div>` : ''}
         </div>
       </div>
 
@@ -179,14 +194,14 @@ function renderThreatPage(threat: AgentThreatDetail, prevId: string | null, next
         <div class="pane-content prose">${threat.description}</div>
       </div>` : ''}
 
-      ${threat.owaspRelation ? `
+      ${threat.owaspBody ? `
       <div class="detail-pane detail-pane-full" style="margin-top:24px">
         <div class="pane-header">
           <span class="pane-icon" style="color:#facc15">⚠</span>
-          <h2>与 OWASP LLM Top 10 的关联 <span class="pane-title-en">OWASP Relation</span></h2>
+          <h2>与 OWASP Top 10 for LLM的关联 <span class="pane-title-en">OWASP Relation</span></h2>
           <span class="pane-line"></span>
         </div>
-        <div class="pane-content prose">${threat.owaspRelation}</div>
+        <div class="pane-content prose">${threat.owaspBody}</div>
       </div>` : ''}
 
       ${threat.attackScenarios ? `
@@ -328,7 +343,7 @@ export async function render(app: HTMLElement, route: Route): Promise<void> {
     app.innerHTML = await renderListPage();
   } else if (route.page === 'ai-agent-threat') {
     app.innerHTML = '<div class="loading-screen"><div class="spinner"></div><span>DECRYPTING THREAT DATA...</span></div>';
-    const ids = await getSortedThreatIds();
+    const ids = await getTableOrderedThreatIds();
     const threat = await loadThreatDetail(route.threatId);
     if (!threat) {
       app.innerHTML = '<div class="loading-screen"><span>ERROR: THREAT NOT FOUND</span></div>';
