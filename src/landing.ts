@@ -16,8 +16,8 @@ export function renderLanding(): string {
           <span class="title-bracket">[</span><span class="typewriter-text"></span><span class="typewriter-cursor">|</span><span class="title-bracket">]</span>
         </h1>
       </div>
-    </main>
-    ${renderFooter()}`;
+      ${renderFooter()}
+    </main>`;
 }
 
 export function initLandingEffects(): void {

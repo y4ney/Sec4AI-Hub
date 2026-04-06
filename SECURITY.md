@@ -6,8 +6,8 @@
 
 请通过以下方式负责任地披露：
 
-1. 发送邮件至项目维护者
-2. 在邮件中包含以下信息：
+1. **推荐：** 通过 [GitHub Security Advisories](https://github.com/y4ney/Sec4AI-Hub/security/advisories/new) 私下提交报告
+2. 在报告中包含以下信息：
    - 漏洞类型（如 XSS、注入、权限绕过等）
    - 影响范围和严重程度
    - 复现步骤

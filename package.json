@@ -1,9 +1,13 @@
 {
-  "name": "aiforsecurity-hub",
+  "name": "sec4ai-hub",
   "private": true,
   "version": "1.0.0",
   "description": "AI 安全威胁知识库 — 涵盖 OpenClaw MAESTRO 威胁模型与 AI Agent 威胁模型，提供交互式安全威胁建模与防护剧本",
   "type": "module",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
   "keywords": [
     "maestro",
     "threat-model",
@@ -16,10 +20,13 @@
     "threat-intelligence",
     "playbook"
   ],
-  "homepage": "https://y4ney.github.io/maestro-threat-model/",
+  "homepage": "https://y4ney.github.io/Sec4AI-Hub/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/y4ney/maestro-threat-model.git"
+    "url": "https://github.com/y4ney/Sec4AI-Hub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/y4ney/Sec4AI-Hub/issues"
   },
   "author": "y4ney",
   "license": "Apache-2.0",
@@ -28,13 +35,14 @@
     "build": "tsc && vite build && cp dist/index.html dist/404.html",
     "preview": "vite preview",
     "gen": "node gen-index.mjs",
-    "prebuild": "node gen-index.mjs && rm -rf public/wiki && mkdir -p public/wiki && cp -r wiki/openclaw-threat-model public/wiki/openclaw-threat-model && cp -r wiki/ai-agent-threat-model public/wiki/ai-agent-threat-model",
+    "prebuild": "node gen-index.mjs",
     "lint": "tsc --noEmit",
     "start": "bash start.sh",
     "video": "node scripts/demo-video.mjs"
   },
   "devDependencies": {
     "@playwright/test": "^1.59.1",
+    "@types/node": "^25.5.2",
     "typescript": "~5.9.3",
     "vite": "^8.0.1"
   },

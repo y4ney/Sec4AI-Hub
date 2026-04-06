@@ -1,5 +1,5 @@
 # ═══════════════════════════════════════════════════════════════
-# MAESTRO Threat Model — Multi-stage Dockerfile
+# Sec4AI Hub — Multi-stage Dockerfile
 # CIS Docker Benchmark compliant
 # ═══════════════════════════════════════════════════════════════
 
@@ -22,10 +22,10 @@ COPY tsconfig.json ./
 COPY index.html ./
 COPY src/ ./src/
 COPY public/ ./public/
+COPY vite.config.ts ./
 
-# Generate index, sync wiki, build production bundle
+# Generate index, build production bundle (Vite plugin copies wiki to dist/)
 RUN node gen-index.mjs \
-    && rm -rf public/wiki && cp -r wiki public/wiki \
     && npm run build \
     && cp dist/index.html dist/404.html
 

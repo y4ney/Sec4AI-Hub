@@ -5,12 +5,8 @@
 <h1 align="center">Sec4AI Hub</h1>
 
 <p align="center">
-  <strong>中文</strong> | <a href="README_EN.md">English</a>
-</p>
-
-<p align="center">
-  AI 安全威胁知识库平台 — 覆盖 Agentic AI 系统全链路安全威胁建模与防护<br/>
-  汇聚 <strong>OpenClaw MAESTRO</strong> 威胁模型 &amp; <strong>AI Agent</strong> 威胁模型
+  Interactive AI Security Threat Knowledge Base — Full-Chain Threat Modeling & Defense for Agentic AI Systems<br/>
+  Aggregating <strong>OpenClaw MAESTRO</strong> Threat Model &amp; <strong>AI Agent</strong> Threat Model
 </p>
 
 <p align="center">
@@ -24,63 +20,61 @@
 </p>
 
 <p align="center">
-  <a href="#quick-start">快速开始</a> •
-  <a href="#docker-deployment">Docker</a> •
-  <a href="#project-structure">项目结构</a> •
-  <a href="#threat-models">威胁模型</a> •
-  <a href="#contributing">贡献指南</a> •
-  <a href="#license">许可证</a>
+  <a href="#quick-start">Quick Start</a> &bull;
+  <a href="#docker-deployment">Docker</a> &bull;
+  <a href="#project-structure">Structure</a> &bull;
+  <a href="#threat-models">Threat Models</a> &bull;
+  <a href="#contributing">Contributing</a> &bull;
+  <a href="#license">License</a>
+</p>
+
+<p align="center">
+  <a href="README.md">中文</a> | <strong>English</strong>
 </p>
 
 ---
 
 ## Overview
 
-Sec4AI Hub 是一个交互式的 AI 安全威胁知识库，涵盖两大威胁模型：
+Sec4AI Hub is an interactive AI security threat knowledge base that integrates two major threat models:
 
 ### OpenClaw MAESTRO Threat Model
 
-基于 [OpenClaw](https://github.com/openclaw/openclaw) 开源项目，参考 MAESTRO 七层防御框架，系统性地梳理了 **39 个安全威胁**，覆盖从基础模型到智能体生态系统的完整安全分析。
+Based on the [OpenClaw](https://github.com/openclaw/openclaw) open-source project and the MAESTRO 7-layer defense framework, it systematically catalogs **39 security threats** spanning from foundation models to agent ecosystems.
 
-| 层级 | 名称 | 威胁数 |
+| Layer | Name | Threats |
 |:---:|------|:---:|
-| L1 | 基础模型 Foundation Model | 5 |
-| L2 | 数据操作 Data Operations | 6 |
-| L3 | 智能体框架 Agent Framework | 6 |
-| L4 | 部署与基础设施 Deployment & Infra | 6 |
-| L5 | 评估与可观测性 Evaluation & Observability | 5 |
-| L6 | 安全与合规 Security & Compliance | 6 |
-| L7 | 智能体生态系统 Agent Ecosystem | 5 |
+| L1 | Foundation Model | 5 |
+| L2 | Data Operations | 6 |
+| L3 | Agent Framework | 6 |
+| L4 | Deployment & Infrastructure | 6 |
+| L5 | Evaluation & Observability | 5 |
+| L6 | Security & Compliance | 6 |
+| L7 | Agent Ecosystem | 5 |
 
 ### AI Agent Threat Model
 
-面向 AI 智能体系统的安全威胁模型，按评估步骤分类，覆盖 **17 个威胁** 和 **6 个防护剧本**，涉及自主推理、记忆系统、工具滥用、身份验证、人类交互、多智能体协作等维度。
+A security threat model for AI agent systems, categorized by assessment steps, covering **17 threats** and **6 defense playbooks** across dimensions including autonomous reasoning, memory systems, tool abuse, authentication, human interaction, and multi-agent collaboration.
 
-| 剧本 | 防护方向 |
+| Playbook | Defense Direction |
 |:---:|------|
-| P1 | 防范 AI Agent 推理操纵 |
-| P2 | 防范记忆投毒与知识篡改 |
-| P3 | 保障工具执行安全与供应链防护 |
-| P4 | 强化身份验证与权限控制 |
-| P5 | 防护人类介入管控体系 |
-| P6 | 保障多智能体通信安全与信任机制 |
+| P1 | Prevent AI Agent reasoning manipulation |
+| P2 | Prevent memory poisoning & knowledge tampering |
+| P3 | Secure tool execution & supply chain defense |
+| P4 | Strengthen authentication & access control |
+| P5 | Protect human oversight systems |
+| P6 | Secure multi-agent communication & trust mechanisms |
 
 ## Features
 
-- **双模型知识库** — OpenClaw (39 threats) + AI Agent (17 threats + 6 playbooks)
-- **交互式浏览** — 按严重等级 / 威胁类别筛选、时间轴式攻击场景展示
-- **全局搜索** — 跨模型关键词搜索，正文匹配 + 高亮预览
-- **防护剧本** — 每个剧本包含主动防护、被动响应、检测监控三层措施
-- **深度导航** — 威胁 / 剧本间前后翻页，面包屑导航
-- **深色主题** — Terminal / Hacker 风格界面
-- **SPA 路由** — 支持深度链接和浏览器前进 / 后退
-- **Docker 部署** — CIS Benchmark 合规，一键容器化
-
-## Screenshots
-
-<p align="center">
-  <em>即将添加 — 欢迎贡献截图</em>
-</p>
+- **Dual Knowledge Base** — OpenClaw (39 threats) + AI Agent (17 threats + 6 playbooks)
+- **Interactive Browsing** — Filter by severity/category, timeline-style attack scenarios
+- **Global Search** — Cross-model keyword search with in-content matching & highlight preview
+- **Defense Playbooks** — Each playbook covers proactive defense, passive response, and detection monitoring
+- **Deep Navigation** — Prev/next paging between threats/playbooks, breadcrumb navigation
+- **Dark Theme** — Terminal/Hacker style interface
+- **SPA Routing** — Deep linking with browser back/forward support
+- **Docker Deployment** — CIS Benchmark compliant, one-click containerization
 
 ## Quick Start
 
@@ -114,7 +108,7 @@ npm run preview
 
 ## Docker Deployment
 
-一键容器化部署，遵循 **Docker CIS Benchmark** 安全最佳实践。
+One-click containerized deployment following **Docker CIS Benchmark** security best practices.
 
 ```bash
 # Build & run
@@ -210,11 +204,11 @@ OpenClaw 源码路径: "src/path/to/file"
 
 #### 威胁描述
 
-详细描述威胁内容...
+Describe the threat in detail...
 
 #### 缓解措施
 
-描述缓解方案...
+Describe mitigation strategies...
 ```
 
 ### AI Agent Threat
@@ -253,13 +247,6 @@ Threat Name: "English Threat Name"
 node gen-index.mjs
 ```
 
-## Acknowledgments
-
-- [OpenClaw](https://github.com/openclaw/openclaw) — MAESTRO 威胁模型分析来源
-- [OWASP Top 10 for LLM Applications](https://owasp.org/www-project-top-10-for-large-language-model-applications/) — 威胁分类参考
-- [Anthropic](https://www.anthropic.com/) & [OpenAI](https://openai.com/) — AI Agent 欺骗性行为与安全研究
-- 构建于 [Vite](https://vitejs.dev/)、[TypeScript](https://www.typescriptlang.org/)、[marked](https://marked.js.org/)
-
 ## Contributing
 
 Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details.
@@ -267,6 +254,13 @@ Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for de
 ### Security Vulnerabilities
 
 Please **do not** report security vulnerabilities in public Issues. See [SECURITY.md](SECURITY.md).
+
+## Acknowledgments
+
+- [OpenClaw](https://github.com/openclaw/openclaw) — Source of the MAESTRO threat model analysis
+- [OWASP Top 10 for LLM Applications](https://owasp.org/www-project-top-10-for-large-language-model-applications/) — Threat categorization reference
+- [Anthropic](https://www.anthropic.com/) & [OpenAI](https://openai.com/) — Research on AI agent deceptive behaviors and safety
+- Built with [Vite](https://vitejs.dev/), [TypeScript](https://www.typescriptlang.org/), and [marked](https://marked.js.org/)
 
 ## License
 
