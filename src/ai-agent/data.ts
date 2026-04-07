@@ -10,6 +10,7 @@ export interface AgentThreatIndexEntry {
   category: string;
   playbookNames: string[];
   owaspRelation: string[];
+  agenticAiRelation: string[];
 }
 
 export interface PlaybookIndexEntry {
@@ -37,6 +38,8 @@ export interface AgentThreatDetail {
   categoryMeta: CategoryMeta;
   playbookNames: string[];
   owaspRelation: string[];
+  agenticAiRelation: string[];
+  agenticAiBody: string;
   owaspBody: string;
   description: string;
   attackScenarios: string;
@@ -126,8 +129,8 @@ export async function buildStepGroups(): Promise<StepGroup[]> {
 
   // Sort by step number extracted from the step string
   const sorted = [...seen.values()].sort((a, b) => {
-    const na = parseInt((a.step.match(/步骤\s*(\d+)/) || a.step.match(/步骤\s*(\d+)/) || [])[1] || '0');
-    const nb = parseInt((b.step.match(/步骤\s*(\d+)/) || b.step.match(/步骤\s*(\d+)/) || [])[1] || '0');
+    const na = parseInt((a.step.match(/S\s*(\d+)/) || a.step.match(/步骤\s*(\d+)/) || [])[1] || '0');
+    const nb = parseInt((b.step.match(/S\s*(\d+)/) || b.step.match(/步骤\s*(\d+)/) || [])[1] || '0');
     return na - nb;
   });
 
@@ -158,6 +161,7 @@ export async function loadThreatDetail(threatId: string): Promise<AgentThreatDet
 
   const descRaw = extractSection(body, '威胁描述');
   const owaspRaw = extractSection(body, 'OWASP');
+  const agenticAiRaw = extractSection(body, 'Agentic AI');
   const attackRaw = extractSection(body, '攻击场景');
   const mitRaw = extractSection(body, '缓解方法');
 
@@ -171,6 +175,8 @@ export async function loadThreatDetail(threatId: string): Promise<AgentThreatDet
     categoryMeta: getCategoryMeta(entry.category, index.categories),
     playbookNames: entry.playbookNames,
     owaspRelation: entry.owaspRelation,
+    agenticAiRelation: (entry as any).agenticAiRelation || [],
+    agenticAiBody: agenticAiRaw ? await renderMarkdown(agenticAiRaw) : '',
     owaspBody: owaspRaw ? await renderMarkdown(owaspRaw) : '',
     description: descRaw ? await renderMarkdown(descRaw) : '',
     attackScenarios: attackRaw ? await renderMarkdown(attackRaw) : '',

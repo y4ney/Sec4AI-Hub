@@ -67,8 +67,9 @@ async function renderListPage(): Promise<string> {
               <tr>
                 <th class="col-id">威胁序号</th>
                 <th class="col-title">威胁名称</th>
-                <th class="col-srcpath">防护剧本</th>
                 <th class="col-owasp">OWASP Top 10 for LLM</th>
+                <th class="col-owasp">OWASP Top 10 for Agentic AI</th>
+                <th class="col-srcpath">防护剧本</th>
               </tr>
             </thead>
             <tbody>
@@ -105,11 +106,11 @@ function renderStepGroups(groups: StepGroup[]): string {
     const color = group.categoryMeta.color;
     return `
     <tr class="layer-group-row">
-      <td colspan="4">
+      <td colspan="5">
         <div class="layer-group-header" style="--tag-color: ${color}">
           <div class="layer-group-title">
             <span class="layer-num">S${group.stepIndex}</span>
-            ${group.stepLabel}
+            ${group.stepLabel.replace(/^S\s*(\d+)\s*[：:]/, (_, n) => `步骤${n}：`)}
             <span class="layer-group-count">${group.threats.length}</span>
           </div>
           <div class="layer-group-desc">${group.category}</div>
@@ -123,13 +124,18 @@ function renderStepGroups(groups: StepGroup[]): string {
           <span class="threat-link">${t.title}</span>
           ${t.owaspRelation.length === 0 ? '<span class="new-badge new-badge-sm">NEW</span>' : ''}
         </td>
-        <td class="col-srcpath">
-          ${t.playbookNames.map(p => `<span class="src-tag">${p}</span>`).join('')}
-        </td>
         <td class="col-owasp">
           ${t.owaspRelation.length > 0
             ? t.owaspRelation.map(o => `<span class="src-tag owasp-tag">${o}</span>`).join('')
             : '<span class="no-data">—</span>'}
+        </td>
+        <td class="col-owasp">
+          ${t.agenticAiRelation?.length > 0
+            ? t.agenticAiRelation.map((o: string) => `<span class="src-tag agentic-ai-tag">${o}</span>`).join('')
+            : '<span class="no-data">—</span>'}
+        </td>
+        <td class="col-srcpath">
+          ${t.playbookNames.map(p => `<span class="src-tag">${p}</span>`).join('')}
         </td>
       </tr>
     `).join('')}
@@ -169,7 +175,8 @@ function renderThreatPage(threat: AgentThreatDetail, prevId: string | null, next
             <span class="field-key">防护剧本</span>
             <div class="field-value">
               ${threat.playbookNames.map(name => {
-                const pbId = 'P' + ((name.match(/剧本\s*(\d+)/) || [])[1] || '');
+                const m = name.match(/^P\s*(\d+)/) || name.match(/剧本\s*(\d+)/);
+                const pbId = m ? 'P' + m[1] : '';
                 return `<span class="src-tag playbook-link" data-nav="ai-agent-playbook" data-playbook-id="${pbId}" style="cursor:pointer">${name}</span>`;
               }).join(' ')}
             </div>
@@ -179,6 +186,13 @@ function renderThreatPage(threat: AgentThreatDetail, prevId: string | null, next
             <span class="field-key">OWASP Top 10 for LLM</span>
             <div class="field-value">
               ${threat.owaspRelation.map(o => `<span class="src-tag owasp-tag">${o}</span>`).join(' ')}
+            </div>
+          </div>` : ''}
+          ${threat.agenticAiRelation.length > 0 ? `
+          <div class="detail-field">
+            <span class="field-key">OWASP Top 10 for Agentic AI</span>
+            <div class="field-value">
+              ${threat.agenticAiRelation.map(o => `<span class="src-tag agentic-ai-tag">${o}</span>`).join(' ')}
             </div>
           </div>` : ''}
         </div>
@@ -202,6 +216,16 @@ function renderThreatPage(threat: AgentThreatDetail, prevId: string | null, next
           <span class="pane-line"></span>
         </div>
         <div class="pane-content prose">${threat.owaspBody}</div>
+      </div>` : ''}
+
+      ${threat.agenticAiBody ? `
+      <div class="detail-pane detail-pane-full" style="margin-top:24px">
+        <div class="pane-header">
+          <span class="pane-icon" style="color:#a78bfa">⚠</span>
+          <h2>与 OWASP Top 10 for Agentic AI的关联 <span class="pane-title-en">Agentic AI Relation</span></h2>
+          <span class="pane-line"></span>
+        </div>
+        <div class="pane-content prose">${threat.agenticAiBody}</div>
       </div>` : ''}
 
       ${threat.attackScenarios ? `
@@ -254,7 +278,7 @@ function renderPlaybookPage(detail: PlaybookDetail, prevId: string | null, nextI
             <span class="field-key">关联威胁</span>
             <div class="field-value">
               ${detail.relatedThreats.map(name => {
-                const tid = threatNameToId[name];
+                const tid = (name.match(/^T\d+/) || [])[0] || threatNameToId[name.replace(/^T\d+\s*[：:]\s*/, '').trim()];
                 if (tid) {
                   return `<span class="src-tag playbook-link" data-nav="ai-agent-threat" data-id="${tid}" style="cursor:pointer">${name}</span>`;
                 }

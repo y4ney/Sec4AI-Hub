@@ -14,7 +14,7 @@ function parseFrontmatter(content) {
 
   for (const line of lines) {
     if (/^\s+- /.test(line) && currentKey) {
-      const val = line.trim().replace(/^- "?/, '').replace(/"?\s*$/, '');
+      const val = line.trim().replace(/^- "?\s*/, '').replace(/\s*"?\s*$/, '');
       if (Array.isArray(meta[currentKey])) meta[currentKey].push(val);
       continue;
     }
@@ -25,7 +25,7 @@ function parseFrontmatter(content) {
 
     if (val === '') { meta[key] = []; currentKey = key; continue; }
 
-    if (val.startsWith('"') && val.endsWith('"')) val = val.slice(1, -1);
+    if (val.startsWith('"') && val.endsWith('"')) val = val.slice(1, -1).trim();
 
     if (val.includes(',') && !val.includes('，') && !val.startsWith('[')) {
       const parts = val.split(',').map(p => p.trim().replace(/^"|"$/g, '')).filter(p => p);
@@ -131,7 +131,8 @@ function generateAIAgentIndex() {
       evaluationStep: meta['威胁评估步骤'] || '',
       category: meta['威胁类别'] || '',
       playbookNames: splitCommaField(meta['防护剧本名称'] || ''),
-      owaspRelation: normalizeArray(meta['与 OWASP Top 10 for LLM的关联'] || meta['OWASP Top 10 for LLM的关联'] || ''),
+      owaspRelation: normalizeArray(meta['与 OWASP Top 10 for LLM 的关联'] || meta['与 OWASP Top 10 for LLM的关联'] || meta['OWASP Top 10 for LLM的关联'] || ''),
+      agenticAiRelation: normalizeArray(meta['与 OWASP Top 10 for Agentic AI 的关联'] || meta['与 OWASP Top 10 for Agentic AI的关联'] || ''),
     });
   }
 

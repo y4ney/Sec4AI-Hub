@@ -11,7 +11,7 @@ export function renderNavbar(opts: NavbarOptions = {}): string {
   const breadcrumb = sub
     ? `<span class="bc-sep" style="opacity:0.3;margin:0 8px">/</span>
        <span class="nav-crumb" data-nav="${sub === 'openclaw' ? 'openclaw-home' : 'ai-agent-home'}" style="cursor:pointer;color:var(--text-muted);font-family:var(--font-mono);font-size:12px;transition:color 0.2s">
-         ${sub === 'openclaw' ? 'OpenClaw' : '智能体式 AI'}
+         ${sub === 'openclaw' ? 'OpenClaw' : 'AI Agent'}
        </span>`
     : '';
 
@@ -40,7 +40,7 @@ export function renderNavbar(opts: NavbarOptions = {}): string {
               <span class="nav-menu-title">OpenClaw</span>
             </div>
             <div class="nav-menu-item ${sub === 'ai-agent' ? 'current' : ''}" data-nav="ai-agent-home">
-              <span class="nav-menu-title">智能体式 AI</span>
+              <span class="nav-menu-title">AI Agent</span>
             </div>
           </div>
         </div>
