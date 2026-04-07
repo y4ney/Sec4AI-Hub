@@ -110,7 +110,7 @@ function renderStepGroups(groups: StepGroup[]): string {
         <div class="layer-group-header" style="--tag-color: ${color}">
           <div class="layer-group-title">
             <span class="layer-num">S${group.stepIndex}</span>
-            ${group.stepLabel.replace(/^S\s*(\d+)\s*[：:]/, (_, n) => `步骤${n}：`)}
+            ${group.stepLabel.replace(/^S\s*(\d+)\s*/, (_, n) => `步骤${n}：`)}
             <span class="layer-group-count">${group.threats.length}</span>
           </div>
           <div class="layer-group-desc">${group.category}</div>
