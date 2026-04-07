@@ -220,6 +220,43 @@ code { font-family: var(--font-mono); }
 
 @keyframes blink { 50% { opacity: 0; } }
 
+/* ─── GitHub Corner ────────────────────────────────────────── */
+.github-corner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  margin-left: 12px;
+  padding: 6px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+}
+.github-corner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.github-corner:hover {
+  color: #f0f6fc;
+  transform: translateY(-2px) scale(1.1);
+}
+.github-corner:hover::before {
+  border-color: rgba(110, 236, 135, 0.4);
+  box-shadow: 0 0 12px rgba(110, 236, 135, 0.15), inset 0 0 8px rgba(110, 236, 135, 0.05);
+}
+.github-icon {
+  filter: drop-shadow(0 0 2px transparent);
+  transition: filter 0.3s ease;
+}
+.github-corner:hover .github-icon {
+  filter: drop-shadow(0 0 6px rgba(110, 236, 135, 0.5));
+}
+
 /* ─── Main Content ──────────────────────────────────────────── */
 .main-content {
   max-width: 1400px;
