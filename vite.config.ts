@@ -34,6 +34,7 @@ function wikiPlugin() {
 }
 
 export default defineConfig({
+  base: "/Sec4AI-Hub/",
   server: {
     host: "127.0.0.1",
   },
