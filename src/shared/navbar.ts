@@ -46,7 +46,7 @@ export function renderNavbar(opts: NavbarOptions = {}): string {
         </div>
         ${searchHtml}
         <div class="nav-right">
-          <span class="terminal-prompt">root@security-for-ai:~$</span>
+          <span class="terminal-prompt">yaney@security-for-ai:~$</span>
           <span class="blink-cursor">█</span>
           <a href="https://github.com/y4ney/Sec4AI-Hub" target="_blank" rel="noopener noreferrer" class="github-corner" title="View on GitHub" aria-label="View source on GitHub">
             <svg width="28" height="28" viewBox="0 0 16 16" fill="currentColor" class="github-icon">
