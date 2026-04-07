@@ -34,7 +34,7 @@ function wikiPlugin() {
 }
 
 export default defineConfig({
-  base: process.env.CI ? "/Sec4AI-Hub/" : "/",
+  base: "/",
   server: {
     host: "127.0.0.1",
   },
